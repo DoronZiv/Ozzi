@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voiceflow Chat Widget Demo</title>
+    <title>העוזר הוירטואלי של אוזי</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,26 +24,34 @@
             color: #333;
         }
     </style>
+    <script defer src="https://cdn.voiceflow.com/voiceflow-sdk.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the Voiceflow Chat Demo</h1>
-        <p>Click on the chat widget in the bottom right corner to start a conversation!</p>
+        <h1>העוזר הוירטואלי של אוזי</h1>
+        <p>לחצו על הכפתור בצד ימין למטה כדי להתחיל שיחה!</p>
     </div>
 
-    <!-- Voiceflow Chat Widget -->
-    <script type="text/javascript">
+    <!-- Load the extensions file and initialize Voiceflow -->
+    <script type="module">
+        import { ImageUploadExtension } from './extensions.js';
+
         (function(d, t) {
-            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            const v = d.createElement(t), s = d.getElementsByTagName(t)[0];
             v.onload = function() {
                 window.voiceflow.chat.load({
                     verify: { projectID: '674eac6749b8573a0d5267f6' },
                     url: 'https://general-runtime.voiceflow.com',
-                    versionID: 'production'
+                    versionID: 'production',
+                    assistant: {
+                        extensions: [ImageUploadExtension],
+                    },
                 });
-            }
-            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+            };
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
+            v.type = "text/javascript"; 
+            s.parentNode.insertBefore(v, s);
         })(document, 'script');
     </script>
 </body>
-</html> 
+</html>
