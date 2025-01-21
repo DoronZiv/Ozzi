@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>העוזר הוירטואלי של אוזי</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             direction: rtl;
@@ -45,10 +44,18 @@
                     verify: { projectID: '674eac6749b8573a0d5267f6' },
                     url: 'https://general-runtime.voiceflow.com',
                     versionID: 'production',
+                    autoOpen: true,
                     assistant: {
                         extensions: [ImageUploadExtension],
                     },
                 });
+
+                // Add a small delay before trying to open the chat
+                setTimeout(() => {
+                    if (window.voiceflow && window.voiceflow.chat) {
+                        window.voiceflow.chat.open();
+                    }
+                }, 1000);
             };
             v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
             v.type = "text/javascript"; 
