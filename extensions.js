@@ -153,11 +153,11 @@ export const TimerExtension = {
   },
 }
 
-export const FileUploadExtension = {
+export const ImageUploadExtension = {
   name: 'FileUpload',
   type: 'response',
   match: ({ trace }) =>
-    trace.type === 'ext_fileUpload' || trace.payload.name === 'ext_fileUpload',
+    trace.type === 'ext_image_upload' || trace.payload.name === 'ext_image_upload',
   render: ({ trace, element }) => {
     const fileUploadContainer = document.createElement('div')
     fileUploadContainer.innerHTML = `
