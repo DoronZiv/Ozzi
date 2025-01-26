@@ -62,45 +62,48 @@
                  ConfettiExtension } from './extensions.js';
 
          // Handle user input and initialize chatbot
-        document.getElementById('start-chat').addEventListener('click'), () => {
-            const userName = document.getElementById('user-name').value.trim();
-            const userEmail = document.getElementById('user-email').value.trim();
-           
-           if (userName && userEmail) {
+         document.getElementById('start-chat').addEventListener('click', function() {
+            const userName = document.getElementById('user_name').value.trim();
+            const userEmail = document.getElementById('user_email').value.trim();
+
+            if (userName && userEmail) {
                 // Hide form after submission
                 document.querySelector('.user-form').style.display = 'none';
 
-        (function(d, t) {
-            const v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-            v.onload = function() {
-                window.voiceflow.chat.load({
-                    verify: { projectID: '674eac6749b8573a0d5267f6' },
-                    url: "https://general-runtime.voiceflow.com",
-                    versionID: "production",
-                    assistant: {
-                        extensions: [ImageUploadExtension, 
-                                     FeedbackExtension, 
-                                     FormExtension,
-                                     ConfettiExtension],  
-                    },  
-                    launch: {
-                        event: {
-                            type: "launch",
-                            payload: {
-                                user_name: "user_name",
-                                user_email: "user_email"
+                // Initialize Voiceflow Chatbot
+                (function(d, t) {
+                    const v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                    v.onload = function() {
+                        window.voiceflow.chat.load({
+                            verify: { projectID: '674eac6749b8573a0d5267f6' },
+                            url: "https://general-runtime.voiceflow.com",
+                            versionID: "production",
+                            assistant: {
+                                extensions: [ImageUploadExtension, 
+                                            FeedbackExtension, 
+                                            FormExtension,
+                                            ConfettiExtension],  
+                            },  
+                            launch: {
+                                event: {
+                                    type: "launch",
+                                    payload: {
+                                        user_name: userName, // Pass dynamic values
+                                        user_email: userEmail // Pass dynamic values
+                                    },
+                                },
                             },
-                        },
-                    },
-                });
-            };
-            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
-            v.type = "text/javascript"; 
-            s.parentNode.insertBefore(v, s);
-        })(document, 'script');
-    } else  {
-        alert('אנא מלאו את כל השדות!');
-    }}
+                        });
+                    };
+                    v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
+                    v.type = "text/javascript"; 
+                    s.parentNode.insertBefore(v, s);
+                })(document, 'script');
+            } else {
+                // Show an alert if fields are missing
+                alert('אנא מלאו את כל השדות!');
+            }
+        });
     </script>
 </body>
 </html>
