@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>העוזר הוירטואלי של אוזי</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
-            direction: rtl;
-            text-align: right;
-            font-family: Arial, sans-serif; 
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -18,7 +17,7 @@
             background-color: #f0f2f5;
         }
         .container {
-            text-align: right;
+            text-align: center;
             max-width: 800px;
         }
         h1 {
@@ -35,27 +34,33 @@
 
     <!-- Load the extensions file and initialize Voiceflow -->
     <script type="module">
-        import { ImageUploadExtension } from './extensions.js';
+        import { ImageUploadExtension, 
+                 FeedbackExtension,
+                 FormExtension,
+                 ConfettiExtension
+         } from './extensions.js';
 
         (function(d, t) {
             const v = d.createElement(t), s = d.getElementsByTagName(t)[0];
             v.onload = function() {
                 window.voiceflow.chat.load({
                     verify: { projectID: '674eac6749b8573a0d5267f6' },
-                    url: 'https://general-runtime.voiceflow.com',
-                    versionID: 'production',
-                    autoOpen: true,
+                    url: "https://general-runtime.voiceflow.com",
+                    versionID: "production",
                     assistant: {
-                        extensions: [ImageUploadExtension],
+                        extensions: [ImageUploadExtension, FeedbackExtension, FormExtension,
+                        ConfettiExtension],  
+                    },  
+                    launch: {
+                        event: {
+                            type: "launch",
+                            payload: {
+                                user_name: "user_name",
+                                user_email: "user_email"
+                            },
+                        },
                     },
                 });
-
-                // Add a small delay before trying to open the chat
-                setTimeout(() => {
-                    if (window.voiceflow && window.voiceflow.chat) {
-                        window.voiceflow.chat.open();
-                    }
-                }, 1000);
             };
             v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
             v.type = "text/javascript"; 
