@@ -23,6 +23,20 @@
         h1 {
             color: #333;
         }
+        .user-form {
+            margin-top: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
     </style>
     <script defer src="https://cdn.voiceflow.com/voiceflow-sdk.min.js"></script>
 </head>
@@ -30,6 +44,14 @@
     <div class="container">
         <h1>העוזר הוירטואלי של אוזי</h1>
         <p>לחצו על הכפתור בצד ימין למטה כדי להתחיל שיחה!</p>
+        <p>אנא הזינו את שמכם וכתובת המייל כדי להתחיל:</p>
+
+        <!-- User Form -->
+        <div class="user-form">
+                    <input type="text" id="user_name" placeholder="הזינו שם" required>
+                    <input type="email" id="user_email" placeholder="הזינו כתובת מייל" required>
+                    <button id="start-chat">התחל שיחה</button>
+        </div>
     </div>
 
     <!-- Load the extensions file and initialize Voiceflow -->
@@ -37,8 +59,16 @@
         import { ImageUploadExtension, 
                  FeedbackExtension,
                  FormExtension,
-                 ConfettiExtension
-         } from './extensions.js';
+                 ConfettiExtension } from './extensions.js';
+
+         // Handle user input and initialize chatbot
+        document.getElementById('start-chat').addEventListener('click', () => 
+            const userName = document.getElementById('user-name').value.trim();
+            const userEmail = document.getElementById('user-email').value.trim();)
+           
+            if (userName && userEmail) 
+                // Hide form after submission
+                document.querySelector('.user-form').style.display = 'none';
 
         (function(d, t) {
             const v = d.createElement(t), s = d.getElementsByTagName(t)[0];
@@ -48,8 +78,10 @@
                     url: "https://general-runtime.voiceflow.com",
                     versionID: "production",
                     assistant: {
-                        extensions: [ImageUploadExtension, FeedbackExtension, FormExtension,
-                        ConfettiExtension],  
+                        extensions: [ImageUploadExtension, 
+                                     FeedbackExtension, 
+                                     FormExtension,
+                                     ConfettiExtension],  
                     },  
                     launch: {
                         event: {
@@ -66,6 +98,9 @@
             v.type = "text/javascript"; 
             s.parentNode.insertBefore(v, s);
         })(document, 'script');
+     else {
+        alert('אנא מלאו את כל השדות!');
+    };
     </script>
 </body>
 </html>
