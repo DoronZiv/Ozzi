@@ -44,14 +44,6 @@
     <div class="container">
         <h1>העוזר הוירטואלי של אוזי</h1>
         <p>לחצו על הכפתור בצד ימין למטה כדי להתחיל שיחה!</p>
-        <p>אנא הזינו את שמכם וכתובת המייל כדי להתחיל:</p>
-
-        <!-- User Form -->
-        <div class="user-form">
-                    <input type="text" id="user_name" placeholder="הזינו שם" required>
-                    <input type="email" id="user_email" placeholder="הזינו כתובת מייל" required>
-                    <button id="start-chat">התחל שיחה</button>
-        </div>
     </div>
 
     <!-- Load the extensions file and initialize Voiceflow -->
@@ -61,16 +53,7 @@
                  FormExtension,
                  ConfettiExtension } from './extensions.js';
 
-         // Handle user input and initialize chatbot
-         document.getElementById('start-chat').addEventListener('click', function() {
-            const userName = document.getElementById('user_name').value.trim();
-            const userEmail = document.getElementById('user_email').value.trim();
-
-            if (userName && userEmail) {
-                // Hide form after submission
-                document.querySelector('.user-form').style.display = 'none';
-
-                // Initialize Voiceflow Chatbot
+                       // Initialize Voiceflow Chatbot
                 (function(d, t) {
                     const v = d.createElement(t), s = d.getElementsByTagName(t)[0];
                     v.onload = function() {
@@ -84,26 +67,12 @@
                                             FormExtension,
                                             ConfettiExtension],  
                             },  
-                            launch: {
-                                event: {
-                                    type: "launch",
-                                    payload: {
-                                        user_name: userName, // Pass dynamic values
-                                        user_email: userEmail // Pass dynamic values
-                                    },
-                                },
-                            },
                         });
                     };
                     v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
                     v.type = "text/javascript"; 
                     s.parentNode.insertBefore(v, s);
                 })(document, 'script');
-            } else {
-                // Show an alert if fields are missing
-                alert('אנא מלאו את כל השדות!');
-            }
-        });
     </script>
 </body>
 </html>
