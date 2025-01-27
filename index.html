@@ -67,8 +67,18 @@
                                             FormExtension,
                                             ConfettiExtension],  
                             },
-                            // Automatically open the chatbot when it loads
-                            autoOpen: true,   
+                            autoOpen: true, // Attempt to auto-open
+                        })
+                        .then((instance) => {
+                            // Explicitly open if autoOpen doesn't work
+                            if (instance && typeof instance.open === 'function') {
+                                instance.open();
+                            } else {
+                                console.warn("Chatbot loaded, but autoOpen did not trigger.");
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error initializing Voiceflow chatbot:", error); 
                         });
                     };
                     v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
