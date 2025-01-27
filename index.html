@@ -68,6 +68,9 @@
                                             ConfettiExtension],  
                             },  
                         });
+
+                        // Automatically open the chatbot
+                        chat.then((instance) => instance.open());
                     };
                     v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
                     v.type = "text/javascript"; 
