@@ -67,24 +67,21 @@
                                             FormExtension,
                                             ConfettiExtension],  
                             },
-                            autoOpen: true, // Attempt to auto-open
-                        })
-                        .then((instance) => {
-                            // Explicitly open if autoOpen doesn't work
-                            if (instance && typeof instance.open === 'function') {
-                                instance.open();
-                            } else {
-                                console.warn("Chatbot instance is not available or doesn't support 'open'.");
-                            }
-                        })
-                        .catch((error) => {
-                            console.error("Error initializing Voiceflow chatbot:", error); 
+                            // Automatically open the chatbot when it loads
+                            autoOpen: true   
                         });
-                };
-                v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
-                v.type = "text/javascript"; 
-                s.parentNode.insertBefore(v, s);
-            })(document, 'script');
+                          
+                        // Add a small delay before trying to open the chat
+                        setTimeout(() => {
+                            if (window.voiceflow && window.voiceflow.chat) {
+                                window.voiceflow.chat.open();
+                            }
+                        }, 1000);
+                    };
+                    v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
+                    v.type = "text/javascript"; 
+                    s.parentNode.insertBefore(v, s);
+                })(document, 'script');
     </script>
 </body>
 </html>
