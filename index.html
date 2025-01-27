@@ -74,17 +74,18 @@
                             if (instance && typeof instance.open === 'function') {
                                 instance.open();
                             } else {
-                                console.warn("Chatbot loaded, but autoOpen did not trigger.");
+                                console.warn("Chatbot instance is not available or doesn't support 'open'.");
                             }
                         })
                         .catch((error) => {
                             console.error("Error initializing Voiceflow chatbot:", error); 
                         });
-                    };
-                    v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
-                    v.type = "text/javascript"; 
-                    s.parentNode.insertBefore(v, s);
-                })(document, 'script');
+                    }, 1000); // 1-second delay to ensure auto-open functionality
+                };
+                v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; 
+                v.type = "text/javascript"; 
+                s.parentNode.insertBefore(v, s);
+            })(document, 'script');
     </script>
 </body>
 </html>
